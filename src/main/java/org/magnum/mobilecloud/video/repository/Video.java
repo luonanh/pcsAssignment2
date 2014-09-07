@@ -1,5 +1,8 @@
 package org.magnum.mobilecloud.video.repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -34,10 +37,11 @@ public class Video {
 	private String name;
 	private String url;
 	private long duration;
-	
-	//@ElementCollection
-	//@CollectionTable(name="tags")
 	private long likes;
+
+	@ElementCollection
+	@CollectionTable(name="likeUsername")
+	private List<String> likeUsernames = new ArrayList<String>(); 
 	
 	public Video() {
 	}
@@ -90,6 +94,14 @@ public class Video {
 		this.likes = likes;
 	}
 	
+	public List<String> getLikeUsernames() {
+		return likeUsernames;
+	}
+
+	public void setLikeUsernames(List<String> likeUsernames) {
+		this.likeUsernames = likeUsernames;
+	}
+
 	/**
 	 * Two Videos will generate the same hashcode if they have exactly the same
 	 * values for their name, url, and duration.
